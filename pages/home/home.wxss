@@ -1,1 +1,13 @@
 /* pages/home/home.wxss */
+/* A位 */
+.top-theme {
+  width: 100%;
+  height: 260rpx;
+  display: flex;
+}
+
+/* B位 */
+.swiper {
+  width: 100%;
+  height: 360rpx;
+}
