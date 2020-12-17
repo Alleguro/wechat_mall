@@ -1,0 +1,6 @@
+<l-grid l-class="grid">
+    <l-grid-item wx:for="{{grids}}" wx:key="{{index}}" key="{{index}}" slot="{{index}}">
+        <image class="img" src="{{item.img}}"></image>
+        <view class="title">{{item.title}}</view>
+    </l-grid-item>
+</l-grid>

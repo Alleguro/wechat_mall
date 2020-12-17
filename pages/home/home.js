@@ -1,4 +1,6 @@
 // pages/home/home.js
+import {Category} from "../../models/category";
+
 const {
     Banner
 } = require("../../models/banner");
@@ -12,7 +14,8 @@ Page({
      */
     data: {
         themeA: null,
-        bannerB: null
+        bannerB: null,
+        gridC: null
     },
 
     /**
@@ -29,11 +32,16 @@ Page({
         await theme.getThemes();
         // 获取A位置主题 主题
         const themeA = theme.getHomeLocationA();
-        // 获取B位置 海报
+
+        // 获取B位置 轮播图
         const bannerB = await Banner.getHomeLocationB();
+
+        // 获取C位置 六宫格
+        const gridC = await Category.getHomeLocationC()
         this.setData({
             themeA,
-            bannerB
+            bannerB,
+            gridC
         })
     },
 

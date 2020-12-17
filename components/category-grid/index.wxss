@@ -1,0 +1,17 @@
+/* components/category-grid/index.wxss */
+.grid {
+    height: 320rpx;
+    margin: 5rpx;
+    border: 1px dashed #DCEBE6;
+}
+
+.img {
+    width: 60rpx;
+    height: 60rpx;
+}
+
+.title {
+    margin-top: 5rpx;
+    font-size: 24rpx;
+    color: #333;
+}

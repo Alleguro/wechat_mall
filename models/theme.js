@@ -10,6 +10,7 @@ class Theme {
     static locationF = 't-3'
     static locationH = 't-4'
     themes = [];
+
     // 获取首页 所有主题
     async getThemes() {
         const names = `${Theme.locationA},${Theme.locationE},${Theme.locationF},${Theme.locationH}`
@@ -25,6 +26,12 @@ class Theme {
     getHomeLocationA() {
         return this.themes.find(t => t.name === Theme.locationA)
     }
+
+    // 获取A位 主题 错误的方法
+    // 非static变量不能在static方法调用啊
+    // static getHomeLocationA() {
+    //     return this.themes.find(t => t.name === Theme.locationA)
+    // }
 }
 
 export {
