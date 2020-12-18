@@ -1,5 +1,6 @@
 // pages/home/home.js
 import {Category} from "../../models/category";
+import {Activity} from "../../models/activity";
 
 const {
     Banner
@@ -15,7 +16,8 @@ Page({
     data: {
         themeA: null,
         bannerB: null,
-        gridC: null
+        gridC: null,
+        activityD: null
     },
 
     /**
@@ -37,11 +39,15 @@ Page({
         const bannerB = await Banner.getHomeLocationB();
 
         // 获取C位置 六宫格
-        const gridC = await Category.getHomeLocationC()
+        const gridC = await Category.getHomeLocationC();
+
+        //获取D位置 优惠券入口
+        const activityD = await Activity.getHomeLocationD()
         this.setData({
             themeA,
             bannerB,
-            gridC
+            gridC,
+            activityD
         })
     },
 

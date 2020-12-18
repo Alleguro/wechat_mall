@@ -1,8 +1,24 @@
 /* components/category-grid/index.wxss */
-.grid {
+.container {
     height: 320rpx;
-    margin: 5rpx;
-    border: 1px dashed #DCEBE6;
+    width: 100%;
+    background: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.inner-container {
+    width: 730rpx;
+    height: 300rpx;
+    border: #DCEBE6 1px dashed;
+}
+
+.grid-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .img {
@@ -10,8 +26,9 @@
     height: 60rpx;
 }
 
-.title {
-    margin-top: 5rpx;
+.text {
+    margin-top: 6rpx;
     font-size: 24rpx;
-    color: #333;
+    color: #333333;
 }
+

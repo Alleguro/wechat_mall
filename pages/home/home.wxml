@@ -1,15 +1,16 @@
-<!--A 主题-->
-<image class="top-theme" src="{{themeA.entrance_img}}"></image>
-        <!--B 轮播 -->
-<swiper class="swiper"
-        indicator-dots
-        indicator-active-color="#157658"
-        autoplay circular>
-    <block wx:for="{{bannerB.items}}" wx:key="index">
-        <swiper-item>
-            <image class="swiper" src="{{item.img}}"></image>
-        </swiper-item>
-    </block>
-</swiper>
-        <!--C 六宫格-->
-<s-category-grid grids="{{gridC}}"></s-category-grid>
+<view class="container">
+    <!--A 主题-->
+    <image class="top-theme" src="{{themeA.entrance_img}}"></image>
+    <!--B 轮播 -->
+    <swiper class="swiper" indicator-dots indicator-active-color="#157658" autoplay circular>
+        <block wx:for="{{bannerB.items}}" wx:key="index">
+            <swiper-item>
+                <image class="swiper" src="{{item.img}}"></image>
+            </swiper-item>
+        </block>
+    </swiper>
+    <!--C 六宫格-->
+    <s-category-grid grids="{{gridC}}"></s-category-grid>
+    <!--D 优惠券入口-->
+    <image class="activity" src="{{activityD.entrance_img}}"></image>
+</view>
