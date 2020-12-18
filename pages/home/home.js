@@ -1,6 +1,10 @@
 // pages/home/home.js
-import {Category} from "../../models/category";
-import {Activity} from "../../models/activity";
+import {
+    Category
+} from "../../models/category";
+import {
+    Activity
+} from "../../models/activity";
 
 const {
     Banner
@@ -17,7 +21,9 @@ Page({
         themeA: null,
         bannerB: null,
         gridC: null,
-        activityD: null
+        activityD: null,
+        themeE: null,
+        themeESpu: null
     },
 
     /**
@@ -43,11 +49,26 @@ Page({
 
         //获取D位置 优惠券入口
         const activityD = await Activity.getHomeLocationD()
+
+        // 获取E位 商品滚动列表
+        const themeE = theme.getHomeLocationE();
+        let themeESpu = []; // E位商品spu的容器
+        if (themeE.online) {
+            // 获取E位商品spu 商品滚动列表
+            const data = await Theme.getLocationEspu();
+            if (data) {
+                //截取0~8的数据
+                themeESpu = data.spu_list.slice(0, 8);
+            }
+        }
+
         this.setData({
             themeA,
             bannerB,
             gridC,
-            activityD
+            activityD,
+            themeE,
+            themeESpu
         })
     },
 

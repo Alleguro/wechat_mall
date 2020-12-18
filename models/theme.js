@@ -27,6 +27,23 @@ class Theme {
         return this.themes.find(t => t.name === Theme.locationA)
     }
 
+    //  获取E位
+    getHomeLocationE() {
+        return this.themes.find(t => t.name === Theme.locationE)
+    }
+
+    // 封装获取E位 spu商品详情 滚动区域
+    static getLocationEspu() {
+        return Theme.getThemeSpuByName(Theme.locationE);
+    }
+
+    // 获取首页带有spu的theme相关数据
+    static getThemeSpuByName(name) {
+        return Http.request({
+            url: `theme/name/${name}/with_spu`
+        })
+    }
+
     // 获取A位 主题 错误的方法
     // 非static变量不能在static方法调用啊
     // static getHomeLocationA() {

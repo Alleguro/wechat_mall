@@ -1,0 +1,19 @@
+<!-- 引入lin-ui的wxs的过滤标题过长的方法 -->
+<wxs src="../../miniprogram_npm/lin-ui/filter/string.wxs" module="s"></wxs>
+<view class="container">
+  <view>
+    <image class="title" src="{{theme.title_img}}"></image>
+  </view>
+  <scroll-view class="scroll-view" enable-flex="{{true}}" scroll-x="{{true}}">
+    <block wx:for="{{spuList}}">
+      <view class="spu-container">
+        <image class="spu-img" src="{{item.img}}"></image>
+        <text class="spu-text">
+          {{item.title.length>=8?s.substring(item.title,0,7)+'...':item.title}}
+        </text>
+        <l-price value="{{item.price}}" color="#157658" l-unit-class="" l-value-class="" reserve-digit="2" autofix>
+        </l-price>
+      </view>
+    </block>
+  </scroll-view>
+</view>
