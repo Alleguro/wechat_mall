@@ -24,7 +24,8 @@ Page({
         activityD: null,
         themeE: null,
         themeESpu: null,
-        themeF: null
+        themeF: null,
+        bannerG: null
     },
 
     /**
@@ -66,7 +67,8 @@ Page({
 
         // 获取F位 甄选入口
         const themeF = theme.getHomeLocationF();
-
+        // 获取G位 三海报
+        const bannerG = await Banner.getHomeLocationG();
         this.setData({
             themeA,
             bannerB,
@@ -74,7 +76,8 @@ Page({
             activityD,
             themeE,
             themeESpu,
-            themeF
+            themeF,
+            bannerG
         })
     },
 

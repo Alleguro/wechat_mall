@@ -22,6 +22,13 @@ class Theme {
         })
     }
 
+    // 获取首页带有spu的theme相关数据
+    static getThemeSpuByName(name) {
+        return Http.request({
+            url: `theme/name/${name}/with_spu`
+        })
+    }
+
     // 获取A位 主题
     getHomeLocationA() {
         return this.themes.find(t => t.name === Theme.locationA)
@@ -37,12 +44,6 @@ class Theme {
         return Theme.getThemeSpuByName(Theme.locationE);
     }
 
-    // 获取首页带有spu的theme相关数据
-    static getThemeSpuByName(name) {
-        return Http.request({
-            url: `theme/name/${name}/with_spu`
-        })
-    }
 
     // 获取F位 甄选入口
     getHomeLocationF() {
