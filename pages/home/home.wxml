@@ -1,6 +1,6 @@
 <view class="container">
     <!--A 主题-->
-    <image class="top-theme" src="{{themeA.entrance_img}}"></image>
+    <image class="full-width-img" src="{{themeA.entrance_img}}" mode="widthFix"></image>
     <!--B 轮播 -->
     <swiper class="swiper" indicator-dots indicator-active-color="#157658" autoplay circular>
         <block wx:for="{{bannerB.items}}" wx:key="index">
@@ -16,4 +16,6 @@
 
     <!--E 滚动商品-->
     <s-spu-scroll wx:if="{{themeE.online}}" theme="{{themeE}}" spuList="{{themeESpu}}"></s-spu-scroll>
+    <!--F  甄选-->
+    <image src="{{themeF.entrance_img}}" class="full-width-img" mode="widthFix"></image>
 </view>

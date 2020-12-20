@@ -23,7 +23,8 @@ Page({
         gridC: null,
         activityD: null,
         themeE: null,
-        themeESpu: null
+        themeESpu: null,
+        themeF: null
     },
 
     /**
@@ -35,7 +36,8 @@ Page({
 
     //进入页面初次加载数据
     async initAllData() {
-        // 实例化主题
+        // 实例化主题对象 
+        // 类的对象：本身具有保存数据的功能，同时也能保存类的状态
         const theme = new Theme();
         await theme.getThemes();
         // 获取A位置主题 主题
@@ -62,13 +64,17 @@ Page({
             }
         }
 
+        // 获取F位 甄选入口
+        const themeF = theme.getHomeLocationF();
+
         this.setData({
             themeA,
             bannerB,
             gridC,
             activityD,
             themeE,
-            themeESpu
+            themeESpu,
+            themeF
         })
     },
 

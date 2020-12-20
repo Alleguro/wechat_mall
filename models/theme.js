@@ -9,7 +9,7 @@ class Theme {
     static locationE = 't-2'
     static locationF = 't-3'
     static locationH = 't-4'
-    themes = [];
+    themes = []; // 保存数据和状态
 
     // 获取首页 所有主题
     async getThemes() {
@@ -43,6 +43,12 @@ class Theme {
             url: `theme/name/${name}/with_spu`
         })
     }
+
+    // 获取F位 甄选入口
+    getHomeLocationF() {
+        return this.themes.find(t => t.name === Theme.locationF)
+    }
+
 
     // 获取A位 主题 错误的方法
     // 非static变量不能在static方法调用啊
