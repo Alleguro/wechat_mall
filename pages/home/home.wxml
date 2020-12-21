@@ -20,4 +20,8 @@
     <image src="{{themeF.entrance_img}}" class="full-width-img" mode="widthFix"></image>
     <!--G 三海报-->
     <s-hot-list banner="{{bannerG}}"></s-hot-list>
+    <!--H 大海报 -->
+    <image class="full-width-img fashion" src="{{themeH.entrance_img}}" mode="widthFix">
+
+    </image>
 </view>

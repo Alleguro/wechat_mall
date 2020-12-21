@@ -50,6 +50,10 @@ class Theme {
         return this.themes.find(t => t.name === Theme.locationF)
     }
 
+    // 获取H位 时尚穿搭
+    getHomeLocationH() {
+        return this.themes.find(t => t.name === Theme.locationH)
+    }
 
     // 获取A位 主题 错误的方法
     // 非static变量不能在static方法调用啊

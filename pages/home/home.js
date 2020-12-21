@@ -25,7 +25,8 @@ Page({
         themeE: null,
         themeESpu: null,
         themeF: null,
-        bannerG: null
+        bannerG: null,
+        themeH: null
     },
 
     /**
@@ -69,6 +70,8 @@ Page({
         const themeF = theme.getHomeLocationF();
         // 获取G位 三海报
         const bannerG = await Banner.getHomeLocationG();
+        // 获取H位 时尚穿搭
+        const themeH = theme.getHomeLocationH();
         this.setData({
             themeA,
             bannerB,
@@ -77,7 +80,8 @@ Page({
             themeE,
             themeESpu,
             themeF,
-            bannerG
+            bannerG,
+            themeH
         })
     },
 

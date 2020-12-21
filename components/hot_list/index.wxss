@@ -1,4 +1,6 @@
 /* components/hot_list/index.wxss */
+@import "../../wxss/sleeve.wxss";
+
 .container {
     display: flex;
     flex-direction: column;
