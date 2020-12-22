@@ -23,7 +23,14 @@
     height: 310rpx;
 }
 
+
+/* F位 甄选 */
+.quality {
+    margin-bottom: 20rpx;
+}
+
 /* H位 */
 .fashion {
     margin-top: 20rpx;
+    margin-bottom: 20rpx;
 }
