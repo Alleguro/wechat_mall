@@ -12,7 +12,7 @@ Component({
             if (!banner) {
                 return
             }
-            console.log(banner)
+
             if (banner.items.length === 0) {
                 return
             }

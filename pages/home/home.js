@@ -5,6 +5,7 @@ import {
 import {
     Activity
 } from "../../models/activity";
+import {SpuPaging} from "../../models/spu-paging";
 
 const {
     Banner
@@ -26,7 +27,9 @@ Page({
         themeESpu: null,
         themeF: null,
         bannerG: null,
-        themeH: null
+        themeH: null,
+        spuPaging: null,// 分页数据
+        loadingType: 'loading' // 分页加载中 或 到底了
     },
 
     /**
@@ -34,8 +37,20 @@ Page({
      */
     async onLoad() {
         await this.initAllData();
+        await this.initBottomSpuList();
     },
 
+    //获取瀑布流数据
+    async initBottomSpuList() {
+        const paging = SpuPaging.getLatestPaging();
+        this.data.spuPaging = paging;
+        const data = await paging.getMoreData();
+        if (!data) {
+            return;
+        }
+        //瀑布流内部已经实现了累加的功能，每次传最新的数据进去即可
+        wx.lin.renderWaterFlow(data.items)
+    },
     //进入页面初次加载数据
     async initAllData() {
         // 实例化主题对象 
@@ -85,6 +100,22 @@ Page({
         })
     },
 
+    /**
+     * 页面上拉触底事件的处理函数
+     */
+    onReachBottom: async function () {
+        const data = await this.data.spuPaging.getMoreData();
+        if (!data) {
+            return;
+        }
+        //瀑布流内部已经实现了累加的功能，每次传最新的数据进去即可
+        wx.lin.renderWaterFlow(data.items)
+        if (!data.moreData) {
+            this.setData({
+                loadingType: 'end'
+            })
+        }
+    },
 
     /**
      * 页面相关事件处理函数--监听用户下拉动作
@@ -93,12 +124,6 @@ Page({
 
     },
 
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
 
     /**
      * 用户点击右上角分享
