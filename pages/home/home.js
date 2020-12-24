@@ -5,7 +5,9 @@ import {
 import {
     Activity
 } from "../../models/activity";
-import {SpuPaging} from "../../models/spu-paging";
+import {
+    SpuPaging
+} from "../../models/spu-paging";
 
 const {
     Banner
@@ -28,7 +30,7 @@ Page({
         themeF: null,
         bannerG: null,
         themeH: null,
-        spuPaging: null,// 分页数据
+        spuPaging: null, // 分页数据
         loadingType: 'loading' // 分页加载中 或 到底了
     },
 
@@ -43,6 +45,7 @@ Page({
     //获取瀑布流数据
     async initBottomSpuList() {
         const paging = SpuPaging.getLatestPaging();
+        // 要保存数据状态，所以保存到data里，不然触底刷新时只能每次都new一个新的paging，这样的做法是不对的
         this.data.spuPaging = paging;
         const data = await paging.getMoreData();
         if (!data) {
