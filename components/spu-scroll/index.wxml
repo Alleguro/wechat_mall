@@ -1,18 +1,23 @@
 <!-- 引入lin-ui的wxs的过滤标题过长的方法 -->
 <wxs src="../../miniprogram_npm/lin-ui/filter/string.wxs" module="s"></wxs>
+        <!-- 引入价格原价和折扣价筛选方法 -->
+<wxs src="../../wxs/price.wxs" module="p"></wxs>
+
 <view class="container">
-  <image class="title" src="{{theme.title_img}}"></image>
-  <scroll-view class="scroll-view" enable-flex="{{true}}" scroll-x="{{true}}">
-    <block wx:for="{{spuList}}">
-      <view class="spu-container">
-        <image class="spu-img" src="{{item.img}}"></image>
-        <text class="spu-text">
-          {{item.title.length>=8?s.substring(item.title,0,7)+'...':item.title}}
-        </text>
-        <l-price value="{{item.price}}" color="#157658" l-unit-class="price-unit" l-value-class="" reserve-digit="2"
-          autofix>
-        </l-price>
-      </view>
-    </block>
-  </scroll-view>
+    <image class="title" src="{{theme.title_img}}"></image>
+    <scroll-view class="scroll-view" enable-flex="{{true}}" scroll-x="{{true}}">
+        <block wx:for="{{spuList}}">
+            <view class="spu-container">
+                <image class="spu-img" src="{{item.img}}"></image>
+                <text class="spu-text">
+                    {{item.title.length >= 8 ? s.substring(item.title, 0, 7) + '...' : item.title}}
+                </text>
+                <l-price
+                        value="{{p.mainPrice(item.price,item.discount_price).price}}" color="#157658"
+                        l-unit-class="price-unit" l-value-class=""
+                        reserve-digit="2" autofix>
+                </l-price>
+            </view>
+        </block>
+    </scroll-view>
 </view>
