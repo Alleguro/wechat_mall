@@ -1,0 +1,39 @@
+/* components/cell/index.wxss */
+.container {
+    height: 60rpx;
+    border: 2rpx solid #333;
+    padding: 2rpx;
+    /*让里面的元素不会撑开外面的盒子*/
+    box-sizing: border-box;
+}
+
+.inner-container {
+    height: 100%;
+    padding-left: 15rpx;
+    padding-right: 15rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: #fff;
+}
+
+/*禁用样式*/
+
+.forbidden {
+    border: 2rpx dashed #bbb;
+    color: #bbb;
+}
+
+/*选中状态*/
+.s-outer {
+    border: 2rpx solid #157658;
+    color: #fff;
+}
+
+.s-inner {
+    background: #157658;
+}
+
+.selected {
+
+}

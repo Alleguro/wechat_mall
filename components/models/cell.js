@@ -1,0 +1,16 @@
+import {CellStatus} from "../../core/enum";
+
+class Cell {
+    title; // sku具体某个值
+    id; // sku具体某个值的id
+    status = CellStatus.WAITING; // 默认状态
+    spec; // 初始数据
+
+    constructor(spec) {
+        this.title = spec.value;
+        this.id = spec.value_id
+        this.spec = spec;
+    }
+}
+
+export {Cell}

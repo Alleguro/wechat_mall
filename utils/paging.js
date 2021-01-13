@@ -60,10 +60,12 @@ class Paging {
         this.accumulator = this.accumulator.concat(items);
     }
 
+    // 是否有更多数据
     static _moreData(totalPage, pageNum) {
         return pageNum < totalPage - 1;
     }
 
+    //处理url
     _getCurrentReq() {
         let url = this.url;
         let params = `start=${this.start}&count=${this.count}`
