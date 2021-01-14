@@ -11,7 +11,7 @@ class SkuPending {
         this.pending[x] = cell;
     }
 
-//   反选:
+//   反选:取消已选择的cell
     removeCell(x) {
         this.pending[x] = null;
     }
@@ -27,6 +27,7 @@ class SkuPending {
         if (!pendingCell) {
             return false;
         }
+        //同一行的cell不一定就是选中的cell，所以这里要再做一层判断
         return cell.id === pendingCell.id;
     }
 }

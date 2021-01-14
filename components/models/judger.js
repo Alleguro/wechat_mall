@@ -34,7 +34,6 @@ class Judger {
             //把sku所有可能的路径都拼接起来，形成路径字典
             this.pathDick = this.pathDick.concat(skuCode.totalsegments)
         })
-        console.log(this.pathDick)
     }
 
 //    更改cell的状态
@@ -46,7 +45,6 @@ class Judger {
             if (!path) {
                 return
             }
-            console.log(path);
             const isIn = this._isInDict(path); // 潜在路径
             if (isIn) {
                 this.fenceGroup.fences[x].cells[y].status = CellStatus.WAITING;
@@ -61,7 +59,7 @@ class Judger {
         return this.pathDick.includes(path);
     }
 
-//    寻找潜在路径,这里的cell是fenceGroup里传来，而不是realm传来的
+//    寻找潜在路径,这里的cell和x是fenceGroup里传来，而不是realm传来的
     _findPotentialPath(cell, x, y) {
         const joiner = new Joiner('#');
         for (let i = 0; i < this.fenceGroup.fences.length; i++) {
@@ -70,7 +68,7 @@ class Judger {
             if (x === i) {
                 //    cell id 1-42
                 if (this.skupending.isSelected(cell, x)) {
-                    return; // 已选中的跳过
+                    return // 已选中的跳过,停止执行后面的代码
                 }
                 const cellCode = this._getCellCode(cell.spec)
                 joiner.join(cellCode);

@@ -1,4 +1,54 @@
 /* components/realm/index.wxss */
 .container {
+    box-sizing: border-box;
     padding: 30rpx;
+    background: #ffffff;
+}
+
+/*图片和文字区域*/
+.sku-preview {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+/*图片*/
+.sku-img {
+    width: 160rpx;
+    height: 160rpx;
+    background: #ccc;
+}
+
+/*右边区域*/
+.sku-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 40rpx;
+}
+
+/*价格区域*/
+.price-row {
+    display: flex;
+    flex-direction: row;
+    /*底部看齐*/
+    align-items: baseline;
+}
+
+/*划线价格*/
+.discount-price {
+    margin-left: 20rpx;
+}
+
+/*请选择*/
+.sku-pending {
+    font-size: 20rpx;
+}
+
+/*横线*/
+.hr {
+    margin-top: 30rpx;
+    width: 690rpx;
+    height: 2rpx;
+    background: #e9e9e9;
 }
