@@ -1,5 +1,6 @@
 import {Matrix} from "./matrix";
 import {Fence} from "./fence";
+import {Cell} from "./cell";
 
 class FenceGroup {
     spu; // 获取到的初始数据
@@ -10,6 +11,31 @@ class FenceGroup {
         this.spu = spu;
         this.skuList = spu.sku_list;
     }
+
+//    默认sku
+    getDefaultSku() {
+        //获取到默认sku的id
+        const defaultSkuId = this.spu.default_sku_id;
+        if (!defaultSkuId) {
+            return;
+        }
+        return this.skuList.find(s => s.id === defaultSkuId);
+    }
+
+    //加载默认sku时刷新所有cell状态
+    setCellStatusById(cellId, status) {
+        this.eachCell((cell) => {
+            if (cell.id === cellId) {
+                cell.status = status
+            }
+        })
+    }
+
+    //更改点击的cell状态
+    setCellStatusByXY(x, y, status) {
+        this.fences[x].cells[y].status = status;
+    }
+
 
 //    初始值sku数据
     initFences() {
@@ -24,6 +50,7 @@ class FenceGroup {
         })
         this.fences = fences;
     }
+
 
 //    点击cell后刷新所有cell的状态
     eachCell(cb) {

@@ -18,10 +18,16 @@ Component({
             }
             const fenceGroup = new FenceGroup(spu)
             fenceGroup.initFences();
-            this.bindInitData(fenceGroup)
             console.log(fenceGroup)
             const judger = new Judger(fenceGroup);
             this.data.judger = judger;
+            const defaultSku = fenceGroup.getDefaultSku()
+            if (defaultSku) {
+                this.bindSkuData(defaultSku)
+            } else {
+                this.bindSpuData();
+            }
+            this.bindInitData(fenceGroup)
         }
     },
     /**
@@ -29,13 +35,36 @@ Component({
      */
     data: {
         judger: Object, // 更改状态
-        fences: Object, // 遍历的数据
+        fences: Object, // 遍历的数据,
+        previewImg: String, // 商品图
+        title: String, // 商品名称
+        price: null,// 原价
+        discountPrice: null // 折扣价
     },
 
     /**
      * 组件的方法列表
      */
     methods: {
+        //没有默认sku
+        bindSpuData() {
+            const spu = this.properties.spu
+            this.setData({
+                previewImg: spu.img,
+                title: spu.title,
+                price: spu.price,
+                discountPrice: spu.discount_price
+            })
+        },
+        //有默认sku
+        bindSkuData(sku) {
+            this.setData({
+                previewImg: sku.img,
+                title: sku.title,
+                price: sku.price,
+                discountPrice: sku.discount_price
+            })
+        },
         //初始化数据
         bindInitData(fenceGroup) {
             this.setData({
@@ -49,7 +78,7 @@ Component({
             const y = e.detail.y
             const judger = this.data.judger;
             console.log(e.detail)
-            judger.judger(cell, x, y);
+            judger.judge(cell, x, y);
             this.setData({
                 fences: judger.fenceGroup.fences
             })

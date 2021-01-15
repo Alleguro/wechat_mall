@@ -13,20 +13,32 @@ import {Joiner} from "../../utils/joiner";
 class Judger {
     fenceGroup; // realm传进来的矩阵转置后的数据
     pathDick = []; // 所有有可能的sku路径组合成的字典
-    skupending; // 记录用户当前点击的节点
+    skuPending; // 记录用户当前点击的节点
 
     constructor(fenceGroup) {
         this.fenceGroup = fenceGroup;
         this._initPathDict();
-        this._initSkupending();
-
+        this._initSkuPending();
     }
-
 //    保存用户当前的cell节点
-    _initSkupending() {
-        this.skupending = new SkuPending();
+    _initSkuPending() {
+        this.skuPending = new SkuPending();
+        //    默认sku
+        const defaultSku = this.fenceGroup.getDefaultSku();
+        if (!defaultSku) {
+            return
+        }
+        this.skuPending.init(defaultSku);
+        this._initSelectedCell();
+        //    刷新页面所有cell的状态,判断默认sku是否存在
+        this.judge(null, null, null, true);
     }
-
+    //    初始化默认sku
+    _initSelectedCell() {
+        this.skuPending.pending.forEach(cell => {
+            this.fenceGroup.setCellStatusById(cell.id, CellStatus.SELECTED)
+        })
+    }
 //    初始化路径字典
     _initPathDict() {
         this.fenceGroup.skuList.forEach(s => {
@@ -35,10 +47,13 @@ class Judger {
             this.pathDick = this.pathDick.concat(skuCode.totalsegments)
         })
     }
-
 //    更改cell的状态
-    judger(cell, x, y) {
-        this._changeCellStatus(cell, x, y);
+    judge(cell, x, y, isInit = false) {
+        //如果不是初始化
+        if (!isInit) {
+            this._changeCurrentCellStatus(cell, x, y);
+        }
+
         //    刷新每一个cell的状态
         this.fenceGroup.eachCell((cell, x, y) => {
             const path = this._findPotentialPath(cell, x, y);
@@ -47,9 +62,9 @@ class Judger {
             }
             const isIn = this._isInDict(path); // 潜在路径
             if (isIn) {
-                this.fenceGroup.fences[x].cells[y].status = CellStatus.WAITING;
+                this.fenceGroup.setCellStatusByXY(x, y, CellStatus.WAITING);
             } else {
-                this.fenceGroup.fences[x].cells[y].status = CellStatus.FORBIDDEN;
+                this.fenceGroup.setCellStatusByXY(x, y, CellStatus.FORBIDDEN);
             }
         })
     }
@@ -63,11 +78,11 @@ class Judger {
     _findPotentialPath(cell, x, y) {
         const joiner = new Joiner('#');
         for (let i = 0; i < this.fenceGroup.fences.length; i++) {
-            const selected = this.skupending.findSelectedCellByX(i);
+            const selected = this.skuPending.findSelectedCellByX(i);
             //当前行
             if (x === i) {
                 //    cell id 1-42
-                if (this.skupending.isSelected(cell, x)) {
+                if (this.skuPending.isSelected(cell, x)) {
                     return // 已选中的跳过,停止执行后面的代码
                 }
                 const cellCode = this._getCellCode(cell.spec)
@@ -90,18 +105,14 @@ class Judger {
     }
 
 //    更改cell的状态
-    _changeCellStatus(cell, x, y) {
+    _changeCurrentCellStatus(cell, x, y) {
         if (cell.status === CellStatus.WAITING) {
-            this.fenceGroup.fences[x].cells[y].status = CellStatus.SELECTED
-            this.skupending.insertCell(cell, x);
-            // console.log(this.skupending.pending)
-
+            this.fenceGroup.setCellStatusByXY(x, y, CellStatus.SELECTED);
+            this.skuPending.insertCell(cell, x);
         }
         if (cell.status === CellStatus.SELECTED) {
-            this.fenceGroup.fences[x].cells[y].status = CellStatus.WAITING
-            this.skupending.removeCell(x);
-            // console.log(this.skupending.pending)
-
+            this.fenceGroup.setCellStatusByXY(x, y, CellStatus.WAITING);
+            this.skuPending.removeCell(x);
         }
     }
 }

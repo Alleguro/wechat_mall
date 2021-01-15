@@ -3,8 +3,20 @@
  * @创建时间 2021-01-12 20:31
  */
 
+import {Cell} from "./cell";
+import {CellStatus} from "../../core/enum";
+
 class SkuPending {
     pending = []; // 记录用户的选择节点
+
+
+    //默认sku
+    init(sku) {
+        for (let i = 0; i < sku.specs.length; i++) {
+            const cell = new Cell(sku.specs[i]);
+            this.insertCell(cell, i);
+        }
+    }
 
 //   正选:x代表cell所在的行
     insertCell(cell, x) {
