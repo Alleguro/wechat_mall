@@ -20,9 +20,29 @@ class Judger {
         this._initPathDict();
         this._initSkuPending();
     }
+
+//    页面"已选择"的显示逻辑
+    isSkuIntact() {
+        return this.skuPending.isIntact();
+    }
+
+    //查找已选择的sku
+    getCurrentValues() {
+        return this.skuPending.getCurrentSpecValues();
+    }
+
+    //查找潜在的没选择（缺失）的sku
+    getMissingKeys() {
+        const missingKeysIndex = this.skuPending.getMissingSpecKeys();
+        return missingKeysIndex.map(i => {
+            return this.fenceGroup.fences[i].title;
+        })
+    }
+
 //    保存用户当前的cell节点
     _initSkuPending() {
-        this.skuPending = new SkuPending();
+        const specsLength = this.fenceGroup.fences.length;    // 完整的sku规格长度
+        this.skuPending = new SkuPending(specsLength);
         //    默认sku
         const defaultSku = this.fenceGroup.getDefaultSku();
         if (!defaultSku) {
@@ -33,12 +53,14 @@ class Judger {
         //    刷新页面所有cell的状态,判断默认sku是否存在
         this.judge(null, null, null, true);
     }
+
     //    初始化默认sku
     _initSelectedCell() {
         this.skuPending.pending.forEach(cell => {
             this.fenceGroup.setCellStatusById(cell.id, CellStatus.SELECTED)
         })
     }
+
 //    初始化路径字典
     _initPathDict() {
         this.fenceGroup.skuList.forEach(s => {
@@ -47,6 +69,7 @@ class Judger {
             this.pathDick = this.pathDick.concat(skuCode.totalsegments)
         })
     }
+
 //    更改cell的状态
     judge(cell, x, y, isInit = false) {
         //如果不是初始化
@@ -67,6 +90,13 @@ class Judger {
                 this.fenceGroup.setCellStatusByXY(x, y, CellStatus.FORBIDDEN);
             }
         })
+    }
+
+//    获取确定的sku
+    getDeterminateSku() {
+        const code = this.skuPending.getSkuCode();
+        const sku = this.fenceGroup.getSku(code);
+        return sku;
     }
 
 //    判断潜在路径是否存在

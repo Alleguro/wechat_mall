@@ -22,6 +22,14 @@ class FenceGroup {
         return this.skuList.find(s => s.id === defaultSkuId);
     }
 
+    //查找sku
+    getSku(skuCode) {
+        //补全code码前面的spu码
+        const fullSkuCode = this.spu.id + '$' + skuCode;
+        const sku = this.spu.sku_list.find(s => s.code === fullSkuCode);
+        return sku ? sku : null;
+    }
+
     //加载默认sku时刷新所有cell状态
     setCellStatusById(cellId, status) {
         this.eachCell((cell) => {

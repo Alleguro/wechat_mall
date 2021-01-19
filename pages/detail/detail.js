@@ -1,7 +1,7 @@
 // pages/detail/detail.js
 import {
     Spu
-} from "../../models/sku";
+} from "../../models/spu";
 
 Page({
 

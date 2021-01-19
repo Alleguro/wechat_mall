@@ -5,6 +5,7 @@ class Fence {
     specs; // 未区分前的规格值
     title; // 规格值的名称
     id; // 规格名的唯一标识
+
     constructor(specs) {
         this.specs = specs;
         this.title = specs[0].key;

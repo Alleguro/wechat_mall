@@ -3,7 +3,7 @@ import {
 } from "../utils/http";
 
 //业务对象
-//theme、banner、spu、sku.js、address、user
+//theme、banner、spu、spu.js、address、user
 class Theme {
     static locationA = 't-1';
     static locationE = 't-2'
