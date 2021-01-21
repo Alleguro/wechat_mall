@@ -15,7 +15,7 @@ class SkuPending {
         this.size = size;
     }
 
-//默认sku
+// 把默认sku放进已选记录节点里
     init(sku) {
         for (let i = 0; i < sku.specs.length; i++) {
             const cell = new Cell(sku.specs[i]);
@@ -52,7 +52,7 @@ class SkuPending {
         return joiner.getStr(); // 返回拼接好的code码
     }
 
-//    页面"已选择"的显示逻辑
+//   判断用户是否已经选择完整的sku （页面"已选择"的显示逻辑）
     isIntact() {
         for (let i = 0; i < this.size; i++) {
             if (this._isEmptyPart(i)) {

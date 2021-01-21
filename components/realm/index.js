@@ -10,6 +10,7 @@ import object from "../../miniprogram_npm/lin-ui/common/async-validator/validato
 import {
     Cell
 } from "../models/cell";
+import {Cart} from "../../models/cart";
 
 const {
     FenceGroup
@@ -50,6 +51,7 @@ Component({
         stock: null, // 库存 具体的sku才有库存
         noSpec: Object, // 判断商品是否无规格
         skuIntact: Object, // 判断用户是否选择了完整的sku
+        currentSkuCount: Cart.SKU_MIN_COUNT, // 保存商品购买数量
     },
     /**
      * 组件的方法列表
@@ -72,11 +74,12 @@ Component({
             this.data.judger = judger;
             const defaultSku = fenceGroup.getDefaultSku() // 默认sku
             if (defaultSku) {
-                this.bindSkuData(defaultSku)
+                this.bindSkuData(defaultSku);
+                this.setStockStatus(defaultSku.stock, this.data.currentSkuCount)
             } else {
                 this.bindSpuData();
             }
-            this.bindFenceGroupData(fenceGroup)
+            this.bindFenceGroupData(fenceGroup);
             this.bindTipData();
         },
         //没有默认sku
@@ -113,6 +116,25 @@ Component({
                 fences: fenceGroup.fences,
             })
         },
+        //设置stock状态
+        setStockStatus(stock, currentCount) {
+            this.setData({
+                outStock: this.isOutOfStock(stock, currentCount)
+            })
+        },
+        //判断库存量和当前用户购买的数量
+        isOutOfStock(stock, currentCount) {
+            return stock < currentCount; // 用户选择的数量大于库存返回true
+        },
+        //每次加减商品数量或输入商品数量后触发的方法，获取到count
+        onSelectCount(e) {
+            const currentCount = e.detail.count;
+            this.data.currentSkuCount = currentCount;
+            if (this.data.judger.isSkuIntact()) { // 判断是否选择了完整的sku
+                const sku = this.data.judger.getDeterminateSku();
+                this.setStockStatus(sku.stock, currentCount);
+            }
+        },
         //接收cell组件传来的值
         onCellTap(e) {
             const data = e.detail.cell;
@@ -125,12 +147,12 @@ Component({
             const skuIntact = judger.isSkuIntact(); // 是否选择了完整的sku
             if (skuIntact) {
                 const currentSku = judger.getDeterminateSku() // 获取完整的选择的sku数据
-                console.log(currentSku);
+                console.log(currentSku)
                 this.bindSkuData(currentSku); // 实现数据的联动
+                this.setStockStatus(currentSku.stock, this.data.currentSkuCount); // 判断用户选择的商品数量是否超出库存,超出则显示缺货
             }
             this.bindTipData(); // 判断是否选择了完整的sku
             this.bindFenceGroupData(judger.fenceGroup)
-            console.log(judger.fenceGroup)
         }
     }
 })

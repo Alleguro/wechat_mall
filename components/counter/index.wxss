@@ -1,0 +1,20 @@
+/* components/counter/index.wxss */
+.container {
+    border: 3rpx solid #157658 !important;
+    height: 48rpx !important;
+}
+
+.all-background {
+    background: transparent !important;
+}
+
+/*控制中间的数字居中*/
+.input-size {
+    min-height: 48rpx !important;
+    line-height: 48rpx !important;
+}
+
+/*控制两遍加减的颜色*/
+.font-color {
+    color: #157658 !important;
+}

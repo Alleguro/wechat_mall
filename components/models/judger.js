@@ -21,7 +21,7 @@ class Judger {
         this._initSkuPending();
     }
 
-//    页面"已选择"的显示逻辑
+//   判断用户是否已经选择完整的sku （页面"已选择"的显示逻辑）
     isSkuIntact() {
         return this.skuPending.isIntact();
     }

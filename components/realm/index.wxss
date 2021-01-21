@@ -69,9 +69,48 @@
 }
 
 /*库存<10*/
-
 .stock-pinch {
     margin-left: 30rpx;
     font-size: 20rpx;
     color: #D20109;
+}
+
+
+/*数量区域*/
+.counter-container {
+    margin-top: 34rpx;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 200rpx;
+}
+
+/*数量选择左边的字体大小*/
+.counter-container text {
+    color: #555;
+    font-size: 24rpx;
+}
+
+/*购物车区域*/
+.bottom-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100rpx;
+    background: #333;
+    position: absolute;
+    bottom: 0;
+}
+
+/*缺货状态*/
+.out-stock {
+    background: #DCEBE6;
+}
+
+/*文字颜色*/
+.bottom-btn text {
+    color: #fff;
 }
