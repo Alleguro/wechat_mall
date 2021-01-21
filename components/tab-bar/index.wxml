@@ -1,0 +1,15 @@
+<!--components/tab-bar/index.wxml-->
+<view class="container">
+    <!--左边两个icon-->
+    <view class="icons">
+        <view bind:tap="onGoToHome">
+            <l-icon name="home" l-class="sleeve"></l-icon>
+        </view>
+        <view bind:tap="onGoToCart">
+            <l-icon name="cart" size="40" color="#157668"/>
+        </view>
+    </view>
+    <!--右边两个按钮-->
+    <view bind:tap="onAddToCart" class="cart btn-font"></view>
+    <view bind:tap="onBuy" class="buy btn-font"></view>
+</view>

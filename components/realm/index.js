@@ -64,6 +64,7 @@ Component({
                 // skuIntact: 无规格下面的不用管
             })
             this.bindSkuData(spu.sku_list[0]);
+            this.setStockStatus(spu.sku_list[0].stock, this.data.currentSkuCount)
         },
         //有规格情况
         processHasSpecs(spu) {
@@ -130,10 +131,13 @@ Component({
         onSelectCount(e) {
             const currentCount = e.detail.count;
             this.data.currentSkuCount = currentCount;
+
             if (this.data.judger.isSkuIntact()) { // 判断是否选择了完整的sku
                 const sku = this.data.judger.getDeterminateSku();
                 this.setStockStatus(sku.stock, currentCount);
+
             }
+
         },
         //接收cell组件传来的值
         onCellTap(e) {

@@ -1,0 +1,7 @@
+/* components/tab-bar/index.wxss */
+
+/*这个类的名字可以任意自定义 "首页"icon样式*/
+.sleeve {
+    font-family: sleeve !important;
+    color: #157658 !important;
+}

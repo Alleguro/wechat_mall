@@ -1,10 +1,32 @@
 page {
-  background: #f5f5f5;
+    background: #f5f5f5;
 }
 
 /* 定义一个全局样式，适用于全局图片定义100%宽度，消除图片空隙;
 使用时调用样式，并定义图片模式为 mode="widthFix" */
 .full-width-img {
-  width: 100%;
-  display: flex;
+    width: 100%;
+    display: flex;
+}
+
+/*"首页"icon样式*/
+@font-face {
+    font-family: 'sleeve';  /* project id 2342443 */
+    src: url('//at.alicdn.com/t/font_2342443_yeg7mj19cpq.eot');
+    src: url('//at.alicdn.com/t/font_2342443_yeg7mj19cpq.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_2342443_yeg7mj19cpq.woff2') format('woff2'),
+    url('//at.alicdn.com/t/font_2342443_yeg7mj19cpq.woff') format('woff'),
+    url('//at.alicdn.com/t/font_2342443_yeg7mj19cpq.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_2342443_yeg7mj19cpq.svg#sleeve') format('svg');
+}
+
+/*这个类的名字可以任意自定义 "首页"icon样式*/
+.sleeve {
+    font-family: sleeve !important;
+    color: #157658 !important;
+}
+
+/*自定义icon，l-icon是固定的前缀，后面的home是自定义的name,before是字体的伪类*/
+.l-icon-home:before {
+    content: "\e650"
 }

@@ -1,2 +1,4 @@
 <!--pages/detail/detail.wxml-->
-<s-realm spu="{{spu}}"></s-realm>
+        <!--<s-realm spu="{{spu}}"></s-realm>-->
+
+<s-tabber></s-tabber>
