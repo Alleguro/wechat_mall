@@ -5,6 +5,7 @@ class Cell {
     id; // sku具体某个值的id
     status = CellStatus.WAITING; // 默认状态
     spec; // 初始数据
+    skuImg; //可视规格图片
 
     constructor(spec) {
         this.title = spec.value;

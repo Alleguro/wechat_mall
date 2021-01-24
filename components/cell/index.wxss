@@ -17,6 +17,14 @@
     background: #fff;
 }
 
+/*可视规格的样式*/
+.inner-container > image {
+    display: flex;
+    width: 44rpx;
+    height: 44rpx;
+    margin-right: 10rpx;
+}
+
 /*禁用样式*/
 
 .forbidden {

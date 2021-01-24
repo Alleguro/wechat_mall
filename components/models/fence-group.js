@@ -54,9 +54,23 @@ class FenceGroup {
         AT.forEach(r => {
             const fence = new Fence(r);
             fence.init(); // 初始化一组sku数据
+            //可视规格
+            if (this._hasSketchFence() && this._isSketchFence(fence.id)) {
+                fence.setFenceSketch(this.skuList);
+            }
             fences.push(fence);
         })
         this.fences = fences;
+    }
+
+//    判断是否存在可视规格
+    _hasSketchFence() {
+        return this.spu.sketch_spec_id ? true : false;
+    }
+
+//    查找可视规格id
+    _isSketchFence(fenceId) {
+        return this.spu.sketch_spec_id === fenceId;
     }
 
 
