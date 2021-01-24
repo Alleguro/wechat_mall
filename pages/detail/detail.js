@@ -2,13 +2,16 @@
 import {
     Spu
 } from "../../models/spu";
+import {ShoppingWay} from "../../core/enum";
 
 Page({
 
     /**
      * 页面的初始数据
      */
-    data: {},
+    data: {
+        showRealm: false, // 控制realm的显示隐藏
+    },
 
     /**
      * 生命周期函数--监听页面加载
@@ -20,7 +23,28 @@ Page({
             spu
         })
     },
-
+    onGotoHome(e) {
+        wx.switchTab({
+            url: `/pages/home/home`
+        })
+    },
+    onGotoCart(e) {
+        wx.switchTab({
+            url: `/pages/cart/cart`
+        })
+    },
+    onAddToCart(e) {
+        this.setData({
+            showRealm: true,
+            orderWay: ShoppingWay.CART
+        })
+    },
+    onBuy(e) {
+        this.setData({
+            showRealm: true,
+            orderWay: ShoppingWay.BUY
+        })
+    },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */

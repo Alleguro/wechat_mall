@@ -1,4 +1,15 @@
 <!--pages/detail/detail.wxml-->
-        <!--<s-realm spu="{{spu}}"></s-realm>-->
 
-<s-tabber></s-tabber>
+        <!--弹出层 显示realm组件内容-->
+<l-popup show="{{showRealm}}" content-align="bottom">
+    <s-realm order-way="{{orderWay}}" spu="{{spu}}"></s-realm>
+</l-popup>
+
+        <!--底部栏-->
+<s-tabber
+        class="tabbar"
+        bind:gotohome="onGotoHome"
+        bind:gotocart="onGotoCart"
+        bind:addtocart="onAddToCart"
+        bind:buy="onBuy"
+></s-tabber>

@@ -1,8 +1,15 @@
 /* components/realm/index.wxss */
 .container {
     box-sizing: border-box;
-    padding: 30rpx;
+    /*padding: 30rpx;*/
     background: #ffffff;
+    max-height: 1000rpx;
+    min-height: 700rpx;
+    margin-bottom: 100rpx;
+}
+
+.inner-container {
+    padding: 30rpx;
 }
 
 /*图片和文字区域*/
@@ -83,7 +90,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 200rpx;
+    padding-bottom: 200rpx;
 }
 
 /*数量选择左边的字体大小*/

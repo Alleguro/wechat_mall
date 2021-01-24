@@ -1,1 +1,8 @@
 /* pages/detail/detail.wxss */
+
+
+/*底部栏*/
+.tabbar {
+    position: fixed;
+    bottom: 0;
+}
