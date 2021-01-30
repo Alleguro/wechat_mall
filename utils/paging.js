@@ -30,7 +30,7 @@ class Paging {
 
     async _actualGetData() {
         const req = this._getCurrentReq();
-        let paging = await Http.request(req);
+        let paging = await Http.request(req); // 获取到分页数据
         if (!paging) {
             return;
         }

@@ -1,0 +1,78 @@
+/* pages/search/search.wxss */
+page {
+    background: #fff;
+}
+
+/*搜索框*/
+.header {
+    background: #fff;
+    border-bottom: 1rpx springgreen #fff;
+    padding-bottom: 14rpx;
+    position: fixed;
+    z-index: 77;
+    width: 750rpx;
+    top: 0;
+}
+
+.input {
+    border-radius: 0 !important;
+}
+
+.container {
+    padding-top: 70rpx;
+}
+
+.history-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.history-title {
+    display: flex;
+    align-content: center;
+    margin-top: 38rpx;
+}
+
+.history-title > text {
+    font-size: 28rpx;
+    color: #333;
+}
+
+.slide {
+    width: 8rpx;
+    height: 46rpx;
+    background: #157658;
+    margin-right: 22rpx;
+}
+
+/*垃圾桶*/
+.icon {
+    margin-right: 30rpx;
+}
+
+/*历史搜索标签区域*/
+.history-tags {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 20rpx;
+    padding-left: 30rpx;
+    flex-wrap: wrap;
+}
+
+/*未选中的样式*/
+.tag {
+    background: #f3f3f3 !important;
+    color: #666 !important;
+    margin-right: 20rpx;
+    margin-bottom: 20rpx;
+}
+
+/*选中的样式*/
+.tag-selected {
+    background: #DCEBE6 !important;
+    color: #157658 !important;
+    margin-right: 20rpx;
+    margin-bottom: 20rpx;
+}

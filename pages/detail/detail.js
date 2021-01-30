@@ -3,6 +3,9 @@ import {
     Spu
 } from "../../models/spu";
 import {ShoppingWay} from "../../core/enum";
+import {SaleExplain} from "../../models/sale-explain";
+import {getSystemSize} from "../../utils/system";
+import {px2rpx} from "../../miniprogram_npm/lin-ui/utils/util";
 
 Page({
 
@@ -19,9 +22,32 @@ Page({
     onLoad: async function (options) {
         const pid = options.pid
         const spu = await Spu.getDetail(pid)
+        const explain = await SaleExplain.getFixed(); // 商品描述
+        const skuListImg = this.filterImg(spu);
+        //动态计算高度
+        const h = await this.setDynamicSegmentHeight();
         this.setData({
-            spu
+            spu,
+            skuListImg, // 滚动商品图
+            explain, // 商品发货地址等等参数
+            segHeight: h
         })
+    },
+    //动态计算页面高度,减去搜索框与margin-top的高度就是页面内容的高度
+    async setDynamicSegmentHeight() {
+        const res = await getSystemSize();
+        const windowHeightRpx = px2rpx(res.windowHeight)
+        return windowHeightRpx - 60 - 20 - 2;
+    },
+    //过滤重复的商品图片
+    filterImg(spu) {
+        const skuListImg = [];
+        for (let i = 0; i < spu.sku_list.length; i++) {
+            if (skuListImg.indexOf(spu.sku_list[i].img) === -1) {
+                skuListImg.push(spu.sku_list[i].img)
+            }
+        }
+        return skuListImg;
     },
     onGotoHome(e) {
         wx.switchTab({
@@ -45,46 +71,11 @@ Page({
             orderWay: ShoppingWay.BUY
         })
     },
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
+    //接收realm组件出来的请选择或已选择的内容
+    onSpecChange(e) {
+        this.setData({
+            specs: e.detail
+        })
     },
 
     /**

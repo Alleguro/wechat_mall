@@ -1,2 +1,48 @@
 <!--pages/category/category.wxml-->
-<text>pages/category/category.wxml</text>
+<view class="container">
+    <!--    A:搜索-->
+    <view class="search-container">
+        <l-button
+                width="650"
+                height="60"
+                shape="square"
+                icon="research"
+                icon-size="24"
+                icon-color="#c4c9d2"
+                l-class="search-btn"
+                bind:lintap="onGotoSearch"
+        >
+            搜索商品
+        </l-button>
+    </view>
+    <!--    B:主体部分-->
+    <view class="main">
+        <!--        C:一级菜单<-->
+        <l-segment
+                activeKey="{{defaultRootId}}"
+                placement="left"
+                height="{{segHeight}}"
+                width="160"
+                scrollable
+                bind:linchange="onSegChange"
+                item-height="90"
+                even="{{false}}"
+                l-active-class="segment-item-active "
+                l-inactive-class="segment-item"
+                l-line-class="l-seg-line"
+        >
+            <block wx:for="{{roots}}" wx:key="{{index}}">
+                <l-segment-item key="{{item.id}}" tab="{{item.name}}">
+                </l-segment-item>
+            </block>
+        </l-segment>
+        <!--        D:二级菜单-->
+        <view class="right">
+            <s-sub-category categories="{{currentSubs}}"
+                            bannerImg="{{currentBannerImg}}"
+                            bind:itemtap="onJumpToSpuList"
+            >
+            </s-sub-category>
+        </view>
+    </view>
+</view>

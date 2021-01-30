@@ -37,6 +37,7 @@ Component({
                 //有规格情况
                 this.processHasSpecs(spu);
             }
+            this.triggerSpecEvent();  // 把已选择或请选择的值和状态传给detail页面
         }
     },
     /**
@@ -60,6 +61,7 @@ Component({
     methods: {
         //处理无规格情况
         processNoSpec(spu) {
+            console.log(spu)
             this.setData({
                 noSpec: true,
                 // skuIntact: 无规格下面的不用管
@@ -84,6 +86,22 @@ Component({
             this.bindFenceGroupData(fenceGroup);
             this.bindTipData();
         },
+        // 把已选择或请选择的值和状态传给detail页面
+        triggerSpecEvent() {
+            const noSpec = Spu.isNoSpec(this.properties.spu)
+            if (noSpec) {
+                this.triggerEvent('specChange', {
+                    noSpec
+                })
+            } else {
+                this.triggerEvent('specChange', {
+                    noSpec: Spu.isNoSpec(this.properties.spu),
+                    skuIntact: this.data.judger.isSkuIntact(),
+                    currentValues: this.data.judger.getCurrentValues(), // 用户已选择的sku
+                    missingKeys: this.data.judger.getMissingKeys() // 用户未选择的潜在sku
+                })
+            }
+        },
         //没有默认sku
         bindSpuData() {
             const spu = this.properties.spu
@@ -104,7 +122,7 @@ Component({
                 stock: sku.stock,
             })
         },
-        //判断用户是否选择了完整的sku
+        //判断用户是否选择了完整的sku,从而显示页面已选择的内容
         bindTipData() {
             this.setData({
                 skuIntact: this.data.judger.isSkuIntact(),
@@ -158,6 +176,7 @@ Component({
             }
             this.bindTipData(); // 判断是否选择了完整的sku
             this.bindFenceGroupData(judger.fenceGroup)
+            this.triggerSpecEvent(); // 把已选择或请选择的值和状态传给detail页面
         }
     }
 })

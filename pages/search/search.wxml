@@ -1,0 +1,61 @@
+<!--pages/search/search.wxml-->
+<view class="header">
+    <!--A：搜索框-->
+    <l-search-bar
+            l-class="input"
+            maxlength="9"
+            bg-color="#f1f1f1"
+            bind:linconfirm="onSearch"
+            bind:lincancel="onCancel"
+            placeholder="输入商品名称">
+    </l-search-bar>
+</view>
+
+<view class="container">
+    <!--BC:历史搜索和热门搜索-->
+    <view wx:if="{{!search}}">
+        <!--    B位-->
+        <view wx:if="{{historyTags.length!==0}}" class="history-container">
+            <view class="history-title">
+                <view class="slide"></view>
+                <text>历史搜索</text>
+                <view style="flex:1"></view>
+                <view bind:tap="onDeleteHistory" class="icon">
+                    <l-icon name="delete" color="#999" size="32"></l-icon>
+                </view>
+            </view>
+            <view class="history-tags">
+                <block wx:for="{{historyTags}}" wx:key="index">
+                    <l-tag bind:lintap="onSearch" name="{{item}}" l-class="tag">
+                        {{item}}
+                    </l-tag>
+                </block>
+            </view>
+        </view>
+        <!--    C位-->
+        <view class="history-container">
+            <view class="history-title">
+                <view class="slide"></view>
+                <text>热门搜索</text>
+                <view style="flex:1"></view>
+            </view>
+            <view class="history-tags">
+                <block wx:for="{{hotTags}}" wx:key="index">
+                    <l-tag bind:lintap="onSearch"
+                           select="{{item.highlight}}"
+                           name="{{item.title}}"
+                           l-select-class="tag-selected"
+                           l-class="tag">
+                        {{item.title}}
+                    </l-tag>
+                </block>
+            </view>
+        </view>
+    </view>
+    <!--    D位：搜索结果页面-->
+    <view wx:else>
+        <block wx:for="{{items}}" wx:key="index">
+            <s-spu-preview-r data="{{item}}"></s-spu-preview-r>
+        </block>
+    </view>
+</view>
