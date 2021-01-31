@@ -54,6 +54,7 @@
     "s-counter": "/components/counter/index",
     "l-price": "/miniprogram_npm/lin-ui/price/index",
     "l-badge": "/miniprogram_npm/lin-ui/badge/index",
+    "l-loading": "/miniprogram_npm/lin-ui/loading/index",
     "l-popup": "/miniprogram_npm/lin-ui/popup/index",
     "l-segment": "/miniprogram_npm/lin-ui/segment/index",
     "l-segment-item": "/miniprogram_npm/lin-ui/segment-item/index",

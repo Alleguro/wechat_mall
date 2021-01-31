@@ -2,13 +2,16 @@
 import {HistoryKeyword} from "../../models/history-keyword";
 import {Tag} from "../../models/tag";
 import {Search} from "../../models/search";
+import {showToast} from "../../utils/ui";
 
 const history = new HistoryKeyword();// 缓存
 Page({
     /**
      * 页面的初始数据
      */
-    data: {},
+    data: {
+        loadingType: 'loading' // 分页加载中 或 到底了
+    },
     /**
      * 生命周期函数--监听页面加载
      */
@@ -25,14 +28,31 @@ Page({
             search: true,
             items: []
         })
-        const keyword = e.detail.value || e.detail.name; // 搜索框的内容进来 或  点击tag标签进来的内容
+        const keyword = e.detail.value || e.detail.name; // 搜索框的内容进来 或 点击tag标签进来的内容
+        if (!keyword || keyword.trim().length === 0) { // 内容不能为空或者是空格
+            showToast('请输入关键字')
+            return;
+        }
         history.save(keyword); // 写入缓存
         this.setData({
             historyTags: history.get()// 读取缓存
         })
-        const paging = Search.search(keyword); // 搜索商品
+        const paging = Search.search(keyword); // 请求接口搜索商品
+        wx.lin.showLoading({
+            color: "#157658",
+            type: 'flash',
+            fullScreen: true // loading居中显示，全屏模式
+        })
         const data = await paging.getMoreData();
+
+        wx.lin.hideLoading() // 关闭loading
+
         this.bindItems(data)
+        if (!data.moreData) {
+            this.setData({
+                loadingType: 'end'
+            })
+        }
     },
     // 绑定搜索到的商品内容
     bindItems(data) {
@@ -55,6 +75,7 @@ Page({
             search: false
         })
     },
+
     /**
      * 用户点击右上角分享
      */
