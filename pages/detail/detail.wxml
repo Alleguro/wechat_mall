@@ -29,19 +29,24 @@
     </view>
     <!--    E：商品详情图-->
     <view class="detail-img-container">
-        <block wx:for="{{spu.spu_detail_img_list}}" wx:key="{{index}}">
+        <block wx:for="{{spu.spu_detail_img_list}}" wx:key="index">
             <image mode="widthFix" class="detail-img" src="{{item.img}}"></image>
         </block>
     </view>
 </scroll-view>
+
         <!--弹出层 显示realm组件内容-->
 <l-popup show="{{showRealm}}" content-align="bottom">
-    <s-realm bind:specChange="onSpecChange" order-way="{{orderWay}}" spu="{{spu}}"></s-realm>
+    <s-realm bind:shopping="onShopping"
+             bind:specChange="onSpecChange"
+             order-way="{{orderWay}}"
+             spu="{{spu}}"></s-realm>
 </l-popup>
 
         <!--底部栏-->
 <s-tabber
         class="tabbar"
+        cart-item-count="{{cartItemCount}}"
         bind:gotohome="onGotoHome"
         bind:gotocart="onGotoCart"
         bind:addtocart="onAddToCart"

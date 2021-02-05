@@ -11,6 +11,7 @@ import {
     Cell
 } from "../models/cell";
 import {Cart} from "../../models/cart";
+import {showToast} from "../../utils/ui";
 
 const {
     FenceGroup
@@ -21,7 +22,7 @@ Component({
      */
     properties: {
         spu: Object,
-        orderWay: String, // 用户的购买方式
+        orderWay: String, // 用户的购买方式 加入购物车或立即购买
     },
 
     observers: {
@@ -89,6 +90,7 @@ Component({
         // 把已选择或请选择的值和状态传给detail页面
         triggerSpecEvent() {
             const noSpec = Spu.isNoSpec(this.properties.spu)
+            console.log(noSpec)
             if (noSpec) {
                 this.triggerEvent('specChange', {
                     noSpec
@@ -150,13 +152,14 @@ Component({
         onSelectCount(e) {
             const currentCount = e.detail.count;
             this.data.currentSkuCount = currentCount;
-
-            if (this.data.judger.isSkuIntact()) { // 判断是否选择了完整的sku
-                const sku = this.data.judger.getDeterminateSku();
-                this.setStockStatus(sku.stock, currentCount);
-
+            if (this.noSpec()) {
+                this.setStockStatus(this.getNoSpecSku().stock, currentCount);
+            } else {
+                if (this.data.judger.isSkuIntact()) {// 判断是否选择了完整的sku
+                    const sku = this.data.judger.getDeterminateSku();
+                    this.setStockStatus(sku.stock, currentCount);
+                }
             }
-
         },
         //接收cell组件传来的值
         onCellTap(e) {
@@ -174,9 +177,54 @@ Component({
                 this.bindSkuData(currentSku); // 实现数据的联动
                 this.setStockStatus(currentSku.stock, this.data.currentSkuCount); // 判断用户选择的商品数量是否超出库存,超出则显示缺货
             }
-            this.bindTipData(); // 判断是否选择了完整的sku
+            this.bindTipData(); // 已选择或未选择的内容
             this.bindFenceGroupData(judger.fenceGroup)
             this.triggerSpecEvent(); // 把已选择或请选择的值和状态传给detail页面
+        },
+
+        //    无规格情况判断
+        noSpec() {
+            const spu = this.properties.spu;
+            return Spu.isNoSpec(spu);
+        },
+//    加入购物车或立即购买
+        onBuyOrCart(e) {
+            if (this.noSpec()) {
+                this.shoppingNoSpec(); // 无规格商品
+            } else {
+                this.shoppingVarious(); // 有规格商品
+            }
+        },
+// 1.购买有规格商品情况
+        shoppingVarious() {
+            const intact = this.data.judger.isSkuIntact() // 判断用户是否选择了完整的sku
+            if (!intact) {
+                const missKeys = this.data.judger.getMissingKeys(); // 用户还没选择的cell
+                wx.showToast({
+                    icon: 'none',
+                    title: `请选择:${missKeys.join(',')}`,
+                    duration: 3000
+                })
+                return
+            }
+            this._triggerShoppingEvent(this.data.judger.getDeterminateSku()); // 用户确定的sku
+        },
+// 2.购买无规格商品情况
+        shoppingNoSpec() {
+            this._triggerShoppingEvent(this.getNoSpecSku());
+        },
+//无规格商品数据
+        getNoSpecSku() {
+            return this.properties.spu.sku_list[0];
+        },
+// 要传送的购买数据或购物车数据
+        _triggerShoppingEvent(sku) {
+            this.triggerEvent('shopping', {
+                orderWay: this.properties.orderWay,  // 用户的购买方式
+                spuId: this.properties.spu.id, // 立即购买还是加入购物车都需要spuId
+                sku: sku,
+                skuCount: this.data.currentSkuCount // 用户购买数量
+            })
         }
     }
 })

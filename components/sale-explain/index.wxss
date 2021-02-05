@@ -20,7 +20,7 @@
 }
 
 /*伪类实现制表符*/
-.inner text:before {
+.inner .text:before {
     content: '·';
     margin-right: 26rpx;
 }

@@ -2,12 +2,14 @@
 <view class="container">
     <!--左边两个icon-->
     <view class="icons">
-        <view bind:tap="onGoToHome">
+        <view class="view" bind:tap="onGoToHome">
             <l-icon size="46" name="home" l-class="sleeve"></l-icon>
             <text>首页</text>
         </view>
-        <view bind:tap="onGoToCart">
-            <l-badge value="777" max-count="99" number-type="limit">
+        <view class="view" bind:tap="onGoToCart">
+            <l-badge value="{{cartItemCount}}"
+                     show="{{cartItemCount!==0}}"
+                     number-type="limit">
                 <l-icon size="46" name="cart" color="#157668"/>
             </l-badge>
             <text>购物车</text>
@@ -15,9 +17,9 @@
     </view>
     <!--右边两个按钮-->
     <view bind:tap="onAddToCart" class="cart btn-font">
-        <text>加入购物车</text>
+        <text class="text">加入购物车</text>
     </view>
     <view bind:tap="onBuy" class="buy btn-font">
-        <text>立即购买</text>
+        <text class="text">立即购买</text>
     </view>
 </view>

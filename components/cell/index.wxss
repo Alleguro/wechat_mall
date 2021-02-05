@@ -18,7 +18,7 @@
 }
 
 /*可视规格的样式*/
-.inner-container > image {
+.inner-container > .img {
     display: flex;
     width: 44rpx;
     height: 44rpx;

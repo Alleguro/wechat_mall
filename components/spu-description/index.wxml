@@ -4,7 +4,7 @@
     <view class="left">
         <text class="title">{{spu.title}}</text>
         <view class="tags">
-            <block wx:for="{{tags}}">
+            <block wx:for="{{tags}}" wx:key="index">
                 <l-tag type="reading"
                        bg-color="#DCEBE6"
                        font-color="#157658"
@@ -45,8 +45,8 @@
         <l-button special open-type="share">
             <view class="inner">
                 <l-icon name="share" color="#157658" size="24"></l-icon>
-                <text>分</text>
-                <text>享</text>
+                <text class="text">分</text>
+                <text class="text">享</text>
             </view>
         </l-button>
     </view>

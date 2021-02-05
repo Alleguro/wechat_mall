@@ -1,1 +1,11 @@
 /* pages/cart/cart.wxss */
+
+/*购物车没有数据时显示的组件*/
+.empty-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 800rpx;
+    background: #f3f4f6;
+}

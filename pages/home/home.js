@@ -40,6 +40,25 @@ Page({
     async onLoad() {
         await this.initAllData();
         await this.initBottomSpuList();
+
+        let cartData = {
+            item: [
+                {id: 1, count: 1},
+                {id: 2, count: 2}
+            ]
+        };
+
+        let item = cartData.item;
+        let oldItem = null
+        for (let i = 0; i < item.length; i++) {
+            if (item[i].id === 2) {
+                oldItem = item[i];
+                break;
+            }
+        }
+
+        oldItem.count = [12, 3, 4];
+        console.log(cartData.item[1].count);
     },
 
     //获取瀑布流数据

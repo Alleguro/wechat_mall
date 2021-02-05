@@ -82,6 +82,13 @@
         {
           "name": "搜索页面",
           "pathName": "pages/search/search",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/cart/cart",
+          "pathName": "pages/cart/cart",
+          "query": "",
           "scene": null
         }
       ]

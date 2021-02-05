@@ -78,7 +78,7 @@
     height: 120rpx;
 }
 
-.inner text {
+.inner .text {
     font-size: 20rpx;
     color: #157658;
 }
