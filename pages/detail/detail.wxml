@@ -40,7 +40,8 @@
     <s-realm bind:shopping="onShopping"
              bind:specChange="onSpecChange"
              order-way="{{orderWay}}"
-             spu="{{spu}}"></s-realm>
+             spu="{{spu}}">
+    </s-realm>
 </l-popup>
 
         <!--底部栏-->

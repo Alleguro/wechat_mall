@@ -1,0 +1,28 @@
+/* components/checkbox/index.wxss */
+
+.container {
+    width: 40rpx;
+    height: 40rpx;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.bg-checked {
+    background: #157658;
+}
+
+.bg-unchecked {
+    background: #DCEBE6;
+    border: 2rpx solid #157658;
+}
+
+.sleeve {
+    font-family: sleeve !important;
+    font-size: 7rpx;
+    font-style: normal;
+    color: #fff !important;
+    line-height: 28rpx;
+}

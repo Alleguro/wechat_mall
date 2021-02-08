@@ -1,8 +1,10 @@
 <!--pages/cart/cart.wxml-->
-<view wx:if="{{!isEmpty}}">
-    <block wx:for="{{cartItems}}">
-        <s-cart-item bind:overflow="onOverflow"
-                     bind:itemdelete="onDeleteItem">
+<view wx:if="{{!isEmpty}}" class="container">
+    <block wx:for="{{cartItems}}" wx:key="index">
+        <s-cart-item
+                cart-item="{{item}}"
+                bind:overflow="onOverflow"
+                bind:itemdelete="onDeleteItem">
         </s-cart-item>
     </block>
 </view>

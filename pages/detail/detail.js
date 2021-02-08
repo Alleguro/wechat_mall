@@ -17,6 +17,7 @@ Page({
     data: {
         showRealm: false, // 控制realm的显示隐藏
         cartItemCount: 0, // 购物车所有商品数量
+        orderWay: null,// 用户购买方式
     },
     /**
      * 生命周期函数--监听页面加载

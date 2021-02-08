@@ -1,1 +1,59 @@
 <!--components/cart-item/index.wxml-->
+<view slot="left" class="container">
+    <view class="checkbox">
+        <s-checkbox checked="{{cartItem.checked}}"></s-checkbox>
+    </view>
+
+    <view class="sku-container">
+        <!--图片-->
+        <view class="image-container">
+            <view wx:if="{{!online}}" class="image-sold-out">
+                <text>下 架</text>
+            </view>
+            <view wx:elif="{{soldOut}}" class="image-sold-out">
+                <text>售 馨</text>
+            </view>
+            <view wx:elif="{{s.shortage(cartItem.sku.sotck)}}" class="image-stock-pinch">
+                <text>仅剩{{cartItem.sku.stock}}件</text>
+            </view>
+            <image mode="aspectFit" class="left" src="{{cartItem.sku.img}}"></image>
+        </view>
+        <!--右边开始-->
+        <view class="right {{soldOut?'disabled':''}}">
+            <!--商品描述-->
+            <view class="description-container">
+                <!--标题和打折标签-->
+                <view class="title-container">
+                    <l-tag wx:if="{{discount}}"
+                           l-class="discount-tag"
+                           size="mini"
+                           bg-color="#c9756"
+                           shape="circle"
+                           type="reading"
+                           height="24"
+                    >
+                        打折
+                    </l-tag>
+                    <text class="title">{{cartItem.sku.title}}</text>
+                </view>
+                <!--是否有规格-->
+                <view wx:if="{{specStr}}" class="spec">
+                    {{specStr}}
+                </view>
+            </view>
+            <!--价格-->
+            <view class="price-container">
+                <l-price color="#157658" count-size="28"
+                         value="{{cartItem.sku.price}}"></l-price>
+                <s-counter bind:linout="onOutNumber"
+                           max="{{cartItem.sku.stock}}"
+                           bind:lintap="onSelectCount"
+                           count="{{cartItem.count}}"
+                >
+                </s-counter>
+            </view>
+        </view>
+        <!--右边结束-->
+    </view>
+
+</view>

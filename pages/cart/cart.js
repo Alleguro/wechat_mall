@@ -24,7 +24,8 @@ Page({
     onShow: function () {
         // 用户可能会不断切换页面，onShow能保证每次切换到购物车页面都刷新购物车页面
         const cart = new Cart()
-        const cartItems = cart.getAllCartItemFromLocal(); // 获取本地缓存中购物车的所有数据
+        const cartItems = cart.getAllCartItemFromLocal().items; // 获取本地缓存中购物车的所有数据
+        console.log(cartItems)
         if (cart.isEmpty()) { // 购物车数据如果为空
             this.empty();   // 购物车没数据的时候才显示empty组件
             return;

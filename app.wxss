@@ -10,14 +10,15 @@ page {
 }
 
 /*"首页"icon样式*/
+
 @font-face {
     font-family: 'sleeve';  /* project id 2342443 */
-    src: url('//at.alicdn.com/t/font_2342443_yeg7mj19cpq.eot');
-    src: url('//at.alicdn.com/t/font_2342443_yeg7mj19cpq.eot?#iefix') format('embedded-opentype'),
-    url('//at.alicdn.com/t/font_2342443_yeg7mj19cpq.woff2') format('woff2'),
-    url('//at.alicdn.com/t/font_2342443_yeg7mj19cpq.woff') format('woff'),
-    url('//at.alicdn.com/t/font_2342443_yeg7mj19cpq.ttf') format('truetype'),
-    url('//at.alicdn.com/t/font_2342443_yeg7mj19cpq.svg#sleeve') format('svg');
+    src: url('//at.alicdn.com/t/font_2342443_oarxu3dv6ep.eot');
+    src: url('//at.alicdn.com/t/font_2342443_oarxu3dv6ep.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_2342443_oarxu3dv6ep.woff2') format('woff2'),
+    url('//at.alicdn.com/t/font_2342443_oarxu3dv6ep.woff') format('woff'),
+    url('//at.alicdn.com/t/font_2342443_oarxu3dv6ep.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_2342443_oarxu3dv6ep.svg#sleeve') format('svg');
 }
 
 /*这个类的名字可以任意自定义 "首页"icon样式*/
@@ -29,4 +30,9 @@ page {
 /*自定义icon，l-icon是固定的前缀，后面的home是自定义的name,before是字体的伪类*/
 .l-icon-home:before {
     content: "\e650"
+}
+
+/*自定义icon，购物车的checkbox组件*/
+.l-icon-check:before {
+    content: "\e63d"
 }
