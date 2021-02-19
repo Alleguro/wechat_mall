@@ -1,5 +1,5 @@
 // 如果有折扣价，则显示折扣价，否则显示原价
-function mainPrive(price, discountPrice) {
+function mainPrice(price, discountPrice) {
     if (!discountPrice) {
         return {
             display: true,
@@ -30,6 +30,6 @@ function slashedPrice(price, discountPrice) {
 
 module.exports =
     {
-        mainPrice: mainPrive,
+        mainPrice: mainPrice,
         slashedPrice: slashedPrice
     }

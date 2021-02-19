@@ -62,7 +62,7 @@
     background-color: #157658;
     opacity: 0.7;
     border-radius: 4rpx;
-    color: #ffffff;
+    color: #fff;
     font-size: 22rpx;
     bottom: 0;
     display: flex;
@@ -110,8 +110,8 @@
 /*标题*/
 .title {
     font-weight: 400;
-    font-size: 26rpx;
-    color: #333333;
+    font-size: 30rpx;
+    color: black;
     line-height: 40rpx;
 }
 
@@ -120,7 +120,7 @@
     line-height: 20rpx;
 }
 
-.spec text {
+.spec .text {
     display: inline-flex;
     padding-left: 10rpx;
     padding-right: 10rpx;
@@ -132,7 +132,7 @@
     font-size: 20rpx;
 }
 
-/*价格*/
+/*价格区域*/
 .price-container {
     display: flex;
     flex-direction: row;
@@ -140,6 +140,7 @@
     align-items: center;
 }
 
+/*滑动删除组件*/
 .slide {
     width: 200rpx;
     height: 220rpx;

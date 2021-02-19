@@ -12,7 +12,7 @@ class Cart {
 
     //代理模式
 
-    static constructor() {
+    constructor() {
         if (typeof Cart.instance === 'object') {
             return Cart.instance
         }
@@ -20,23 +20,88 @@ class Cart {
         return this
     }
 
-//    获取本地缓存购物车的所有数据
+    //    获取本地缓存购物车的所有数据
     getAllCartItemFromLocal() {
         return this._getCartData()
     }
 
-//    判断购物车数据是否为空
+    //    获取所有已勾选的商品数据
+    getCheckedItems() {
+        return this._getCartData().items.filter(item => {
+            return item.checked;
+        })
+    }
+
+    //    改变某商品的count值
+    replaceItemCount(skuId, newCount) {
+        const oldItem = this.findEqualItem(skuId);
+        if (!oldItem) {
+            console.log('异常情况,更新CartItem中的数量不应当找不到');
+            return
+        } else {
+            if (newCount < 1) {
+                console.log('异常情况,CartItem的Count不可能小于1')
+                return
+            }
+            oldItem.count = newCount;
+            if (oldItem.count >= Cart.SKU_MAX_COUNT) {
+                oldItem.count = Cart.SKU_MAX_COUNT
+            }
+        }
+        this._refreshStorage();
+    }
+
+    //    改变checked的状态
+    checkItem(skuId) {
+        const oldItem = this.findEqualItem(skuId)
+        oldItem.checked = !oldItem.checked
+        this._refreshStorage()
+    }
+
+    //    全选按钮的状态
+    isAllChecked() {
+        let allChecked = true
+        const cartItems = this._getCartData().items
+        for (let item of cartItems) {
+            if (!item.checked) {
+                allChecked = false
+                break
+            }
+        }
+        return allChecked
+    }
+
+    //    全选或全取消
+    checkAll(checked) {
+        const cartData = this._getCartData();
+        cartData.items.forEach(item => {
+            item.checked = checked
+        })
+        this._refreshStorage()
+    }
+
+    //    是否售馨
+    static isSoldOut(item) {
+        return item.sku.stock === 0;
+    }
+
+    //    商品上下架
+    static isOnline(item) {
+        return item.sku.online;
+    }
+
+    //    判断购物车数据是否为空
     isEmpty() {
         const cartData = this._getCartData();
         return cartData.items.length === 0;
     }
 
-//    计算购物车商品数量
+    //    计算购物车商品数量
     getCartItemCount() {
         return this._getCartData().items.length;
     }
 
-// 添加商品进购物车
+    // 添加商品进购物车
     addItem(newItem) {
         if (this.beyondMaxCartItemCount()) {
             throw new Error('超出购物车最大数量')
@@ -45,7 +110,7 @@ class Cart {
         this._refreshStorage(); //刷新缓存
     }
 
-// 删除购物车里的商品
+    // 删除购物车里的商品
     removeItem(skuId) {
         const oldItemIndex = this._findEqualItemIndex(skuId);
         const cartData = this._getCartData();
@@ -53,7 +118,7 @@ class Cart {
         this._refreshStorage(); // 刷新本地缓存
     }
 
-//    查找购物车的某个商品的在数组中的坐标
+    //    查找购物车的某个商品的在数组中的坐标
     _findEqualItemIndex(skuId) {
         const cartData = this._getCartData();
         return cartData.items.findIndex(item => {
@@ -61,7 +126,7 @@ class Cart {
         })
     }
 
-// 刷新缓存
+    // 刷新缓存
     _refreshStorage() {
         wx.setStorageSync(Cart.STORAGE_KEY, this._cartData)
     }
@@ -76,6 +141,7 @@ class Cart {
         }
     }
 
+    // 拿到某个商品
     findEqualItem(skuId) {
         let oldItem = null;
         const items = this._getCartData().items
@@ -125,7 +191,7 @@ class Cart {
         return cartData;
     }
 
-// 判断购物车所有种类是否超出最大限制
+    // 判断购物车所有种类是否超出最大限制
     beyondMaxCartItemCount() {
         const cartData = this._getCartData(); // 获取购物车所有商品种类
         return cartData.items.length >= Cart.CART_ITEM_MAX_COUNT;

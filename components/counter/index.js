@@ -32,14 +32,14 @@ Component({
         //数量超出或低于最少时会触发的方法
         onOverStep(e) {
             const minOrMaxOut = e.detail.type;
-            if (minOrMaxOut == 'overflow_max') {
+            if (minOrMaxOut === 'overflow_max') {
                 wx.showToast({
                     icon: "none",
                     duration: 3000,
                     title: `超出最大购买数量`
                 })
             }
-            if (minOrMaxOut == 'overflow_min') {
+            if (minOrMaxOut === 'overflow_min') {
                 wx.showToast({
                     icon: "none",
                     duration: 3000,

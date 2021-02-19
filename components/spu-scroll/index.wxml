@@ -6,7 +6,7 @@
 <view class="container">
     <image class="title" src="{{theme.title_img}}"></image>
     <scroll-view class="scroll-view" enable-flex="{{true}}" scroll-x="{{true}}">
-        <block wx:for="{{spuList}}">
+        <block wx:for="{{spuList}}" wx:key="index">
             <view class="spu-container">
                 <image class="spu-img" src="{{item.img}}"></image>
                 <text class="spu-text">

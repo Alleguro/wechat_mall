@@ -1,10 +1,13 @@
 <!--pages/cart/cart.wxml-->
+        <!--购物车数据-->
 <view wx:if="{{!isEmpty}}" class="container">
     <block wx:for="{{cartItems}}" wx:key="index">
         <s-cart-item
                 cart-item="{{item}}"
-                bind:overflow="onOverflow"
-                bind:itemdelete="onDeleteItem">
+                bind:countfloat="onCountFloat"
+                bind:itemdelete="onDeleteItem"
+                bind:itemcheck="onSingleCheck"
+        >
         </s-cart-item>
     </block>
 </view>
@@ -17,3 +20,28 @@
              btn-text="去逛逛">
     </s-empty>
 </view>
+
+        <!--底部的tabbar,用于显示全选和总价-->
+<view wx:if="{{!isEmpty}}" class="total-container">
+    <view class="data-container">
+        <view class="checkbox-container">
+            <s-checkbox bind:check="onCheckAll" checked="{{allChecked}}">
+            </s-checkbox>
+            <text>全选</text>
+        </view>
+        <view class="price-container">
+            <text>合计</text>
+            <l-price
+                    value="{{totalPrice}}"
+                    color="#157648"
+                    count-size="32"
+                    unit-size="32"
+            ></l-price>
+        </view>
+    </view>
+    <view bind:tap="onSettle" class="settlement-btn {{totalSku}}">
+        <text>结算 ({{totalSkuCount}})</text>
+    </view>
+</view>
+
+<view style="height:100rpx"></view>

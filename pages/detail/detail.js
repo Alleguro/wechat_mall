@@ -77,10 +77,10 @@ Page({
     },
     // 用户选择的购买方式，加入购物车或立即购买
     onShopping(e) {
-        console.log('用户加入购物车的商品：', e.detail)
         const chosenSku = e.detail.sku // 商品参数
         const skuCount = e.detail.skuCount // 购买数量
         if (e.detail.orderWay == ShoppingWay.CART) { // 用户选择加入购物车
+            console.log('用户加入购物车的商品：', e.detail)
             const cart = new Cart();
             const cartItem = new CartItem(chosenSku, skuCount);
             cart.addItem(cartItem); // 加入购物车并添加到缓存
