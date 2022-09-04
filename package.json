@@ -1,0 +1,15 @@
+{
+  "name": "fisherman",
+  "version": "1.0.0",
+  "description": "渔人不出海小程序",
+  "main": "app.js",
+  "dependencies": {
+    "lin-ui": "^0.9.12"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Akiko",
+  "license": "ISC"
+}

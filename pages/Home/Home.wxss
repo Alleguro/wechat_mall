@@ -1,0 +1,23 @@
+/* pages/Home/Home.wxss */
+
+/* A位 */
+.top-theme {
+    width: 100%;
+    height: 260rpx;
+    display: flex;
+}
+
+/* B位 */
+.swiper {
+    width: 100%;
+    height: 360rpx;
+}
+
+/* D位 优惠券入口 */
+.activity {
+    /* 消除图片自带的下边距 */
+    display: flex;
+    margin-top: 20rpx;
+    width: 100%;
+    height: 310rpx;
+}

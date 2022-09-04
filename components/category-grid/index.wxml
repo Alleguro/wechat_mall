@@ -1,0 +1,11 @@
+<!-- 六宫格组件 -->
+<l-grid l-class="grid" >
+    <block wx:for="{{grid}}" wx:key="index">
+        <l-grid-item  key="{{index}}" slot="{{index}}">
+            <view class="grid-item">
+                <image class="img" src="{{item.img}}"></image>
+                <text class="title">{{item.title}}</text>
+            </view>
+        </l-grid-item>
+    </block>
+</l-grid>
