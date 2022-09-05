@@ -1,5 +1,5 @@
 <!-- pages/Home/Home.wxml -->
-<view >
+<view>
     <!-- A -->
     <image class="top-theme" src="{{themeA.entrance_img}}"></image>
     <!-- B 轮播海报 -->
@@ -14,4 +14,5 @@
     <s-category-grid grid="{{gridC}}"></s-category-grid>
     <!-- D 优惠券 -->
     <image class="activity" src="{{activityD.entrance_img}}"></image>
+    <!-- E 商品滚动栏 -->
 </view>
