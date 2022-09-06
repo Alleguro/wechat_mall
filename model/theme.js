@@ -3,7 +3,7 @@ import { Http } from "../utils/http";
 class Theme {
 
     static locationA = 't-1'  // A位海报
-    static locationE = 't-2'
+    static locationE = 't-2'  // E位商品滚动栏
     static locationF = 't-3'
     static locationH = 't-4'
 
